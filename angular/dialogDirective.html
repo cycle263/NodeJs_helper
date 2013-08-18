@@ -66,6 +66,23 @@
                 $routeProvider.when('/route', {templateUrl: 'templdate/1.html', controller: myCtrl}).
                     otherwise({redirectTo: '/route'});
             });
+            
+          messageBox: function(title, message, buttons, boolValue) {
+          return new Dialog({
+            templateUrl: 'template/dialog/message.html',
+            controller: 'MessageBoxController',
+            resolve: {
+              model: function() {
+                return {
+                  title: title,
+                  message: message,
+                  buttons: buttons
+                };
+              }
+            },
+            backdrop: boolValue
+          });
+        }
         </script>
     </body>
 </html>
