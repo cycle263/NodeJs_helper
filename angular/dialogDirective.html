@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <title></title>
+        <script src="../../Lib/angular/angular-1.1.5/angular.js"></script>
+        <script src="../../Lib/angularUI/angularUI-0.5.0.js"></script>
+        <script type="text/ng-template" id="templateId.html">
+            <form>
+                <input required type="text" /><br />
+                <button class="btn" type="submit">Submit</button>
+            </form>
+        </script>
+        <link rel="stylesheet" href="../../Css/bootstrap/css/bootstrap.css">
+        <style>div{margin: 12px;}</style>
+    </head> 
+    <body ng-controller="myCtrl">
+        <div>
+            <button ng-click="openMessageBox()" class="btn">Button</button>
+        </div>
+        <div>
+            <div ng-include="'templateId.html'"></div>
+        </div>
+
+        <div>
+            <span ng-include="'templdate/1.html'"></span>
+        </div>
+
+        <div ng-view></div>
+        <script>
+            var app = angular.module('myApp', ['ui.bootstrap']);
+            
+            function myCtrl($scope, dialogSrv, $dialog){
+                $scope.openMessageBox = function(){                    
+                    dialogSrv.open($dialog, 'Warning', 'Body');
+                };
+            }
+
+            app.service('dialogSrv', function(){
+                var title = 'Dialog Message',
+                    msg = 'Just a warning message',
+                    btns = [{
+                            result: 'cancel',
+                            label: 'Cancel'
+                        }, {
+                            result: 'ok',
+                            label: 'Ok',
+                            cssClass: 'btn-primary'
+                        }
+                    ];
+                
+                this.open = function($dialog, title, msg){
+                    $dialog.messageBox(title, msg, btns, false).open().then(function(result){
+                        
+                    });
+                };
+            });
+
+            app.run(function($templateCache){
+                $templateCache.put('templdate/1.html', 
+                    '<input type="button" value="TmeplateCache" class="btn" />' +
+                    '<input type="button" value="Cancel" class="btn" />'
+                );
+            });
+
+            app.config(function($routeProvider, $locationProvider){
+                $routeProvider.when('/route', {templateUrl: 'templdate/1.html', controller: myCtrl}).
+                    otherwise({redirectTo: '/route'});
+            });
+        </script>
+    </body>
+</html>
