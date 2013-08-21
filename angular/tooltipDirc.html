@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Angular Tooltip</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>        
+    <link rel="stylesheet" href="../../css/bootstrap.css" />
+    <script src="../../lib/angular.js"></script>
+    <style type="text/css">
+
+    .tooltipBox{min-width: 80px;min-height: 30px;background: black;opacity: 0.8;border-radius: 5px;color: white;font-style: italic;display: none;position: absolute;line-height: 32px;padding: 2px 8px;white-space: nowrap;z-index: 99;}
+    button{width: 82px;height: 28px;position: relative;top: 300px;left: 400px;overflow: visible;}
+    .arrow{display: none;opacity: 0.8;}
+    .arrow:after{position: absolute;display: block;width: 0;height: 0;border-color: transparent;border-style: solid;
+        margin-left: 12px;border-bottom-color: black;border-top-width: 0;border-width: 15px;content: "";opacity: 0.8;}
+    p{height: 52px;line-height: 52px;margin: 12px;padding: 12px;}
+    </style>
+</head>
+<body>
+    <div>
+        <button contentEditable tip="this is a test, very long word to say, tell me why?" tooltipDirc>Tooltip</button>
+    </div>
+    
+    <p>dfa</p><p>dfa</p><p>dfa</p><p>dfa</p><p>dfa</p><p>dfa</p><p>dfa</p><p>dfa</p><p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>p>dfa</p>
+    <script type="text/javascript">
+        var app = angular.module('myApp', []);
+
+        app.run(function($templateCache){
+            $templateCache.put('common/tooltip.html', 
+                '<div class="tooltipBox"></div><span class="arrow"></span>'
+            );
+        });
+
+        app.directive('tooltipdirc', function(){
+            return {
+                priority: 0,
+                templateUrl: 'common/tooltip.html',
+                strict: 'EA',
+                replace: false,
+                controller:'',
+                link: function(scope, ele, attrs){
+                    var el = document.getElementsByClassName('tooltipBox')[0],
+                        arrow = document.getElementsByClassName('arrow')[0];
+                    ele.bind('mouseenter', function(e){
+                        el.style.display = 'block';
+                        arrow.style.display = 'block';
+                        // var x = e.pageX, y = e.pageY;
+                        // var ex = ele[0].offsetLeft,
+                        //     ey = ele[0].offsetTop;
+                        //el.getBoundingClientRect().left;
+
+                        el.style.top = (ele[0].offsetHeight + 12) + 'px';
+                        el.style.left = 0;
+                        arrow.style.top = ele[0].offsetHeight + 'px';
+                        arrow.style.left = (ele[0].scrollWidth / 2) + 'px';
+                        el.textContent = attrs.tip;
+                    });  
+                    ele.bind('mouseleave', function(e){
+                        el.style.display = 'none';
+                        arrow.style.display = 'none';
+                    });
+                }
+            };
+        });
+    </script>
+</body>
+</html>
