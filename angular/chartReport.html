@@ -75,6 +75,8 @@
                 }]
             };
 
+            var copyRows = chart1.data.rows;
+
             chart1.options = {
                 "title": "Usage per month",
                 "isStacked": "true",
@@ -95,15 +97,7 @@
             $scope.chart = chart1;
 
             $scope.hideServer = false;
-            $scope.selectionChange = function() {
-                if ($scope.hideServer) {
-                    $scope.chart.view = {
-                        columns: [0, 1, 2]
-                    };
-                } else {
-                    $scope.chart.view = {};
-                }
-
+            $scope.selectionChange = function() {                
                 if($scope.chart.type == 'PieChart'){
                     var arr = $scope.chart.data.rows,
                         l = arr.length, temp = [],
@@ -117,7 +111,18 @@
                         temp.push({c: [{v: arr[i].c[0].v}, {v: total}]});
                     }
                     $scope.chart.data.rows = temp;
+                }else{
+                    $scope.chart.data.rows = copyRows;
                 }
+
+                if ($scope.hideServer) {
+                    $scope.chart.view = {
+                        columns: [0, 1, 2]
+                    };
+                } else {
+                    $scope.chart.view = {};
+                }
+
             }
         }
     </script>
