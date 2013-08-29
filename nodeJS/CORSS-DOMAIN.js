@@ -3,8 +3,8 @@
 function allowOrigin(req, res){
     console.log('allowingCrossDomain');
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization, X-Mindflash-SessionID');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,HEADER');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization, X-Molt-SessionID');
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Content-Type', 'application/json;charset=UTF-8');
 
@@ -17,8 +17,8 @@ function allowOrigin(req, res){
 var allowCrossDomain = function(req, res, next) {
     console.log('allowingCrossDomain');
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization, X-Mindflash-SessionID');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,HEADER');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization, X-Molt-SessionID');
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Content-Type', 'application/json;charset=UTF-8');
       
