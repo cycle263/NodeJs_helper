@@ -24,9 +24,10 @@ var allowCrossDomain = function(req, res, next) {
       
     // intercept OPTIONS method
     if ('OPTIONS' == req.method) {
-      res.send(200);
+        //must after setHeader
+        res.send(200);
     } else {
-      next();
+        next();
     }
 };
 
