@@ -48,24 +48,24 @@ app.all('/*', function(req, res, next){
 
 //client side
 app.config(['$httpProvider', function($httpProvider) {
-            $httpProvider.defaults.useXDomain = true;
-            delete $httpProvider.defaults.headers.common['X-Requested-With'];
-            $httpProvider.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-            $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-            $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-            $httpProvider.defaults.headers['options'] = {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
-            $httpProvider.defaults.headers['delete'] = {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
-            $httpProvider.defaults.transformRequest = function(data){
-                if(data === undefined){return data;}
-                return paramForms(data);
-            };
-        }]);
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    $httpProvider.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    $httpProvider.defaults.headers['options'] = {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
+    $httpProvider.defaults.headers['delete'] = {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
+    $httpProvider.defaults.transformRequest = function(data){
+        if(data === undefined){return data;}
+        return paramForms(data);
+    };
+}]);
 
 // json convert to formEncode
 function paramForms(obj){
-            var result = '';
-            for(var i in obj){
-                result += encodeURIComponent(i) + "=" + encodeURIComponent(obj[i]) + "&";
-            }
-            return result.substr(0,result.length-1).replace(/%20/g, '+');
+    var result = '';
+    for(var i in obj){
+        result += encodeURIComponent(i) + "=" + encodeURIComponent(obj[i]) + "&";
+    }
+    return result.substr(0,result.length-1).replace(/%20/g, '+');
 }
