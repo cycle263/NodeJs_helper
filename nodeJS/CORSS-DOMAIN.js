@@ -4,6 +4,7 @@ function allowOrigin(req, res){
     console.log('allowingCrossDomain');
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,HEADER');
+    res.header('Content-Encoding', 'gzip');
     res.header('Access-Control-Allow-Headers', 'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization, X-Molt-SessionID');
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Content-Type', 'application/json;charset=UTF-8');
@@ -18,6 +19,7 @@ var allowCrossDomain = function(req, res, next) {
     console.log('allowingCrossDomain');
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,HEADER');
+    res.header('Content-Encoding', 'gzip');
     res.header('Access-Control-Allow-Headers', 'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization, X-Molt-SessionID');
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Content-Type', 'application/json;charset=UTF-8');
@@ -42,6 +44,7 @@ app.all('/*', function(req, res, next){
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS,DELETE,HEAD');
     res.header('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept');
+    res.header('Content-Encoding', 'gzip');
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Content-Type', 'application/json;charset=UTF-8');
     next();
@@ -52,6 +55,7 @@ app.config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $httpProvider.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    $httpProvider.defaults.headers.common['Accept-Encoding'] = 'gzip,deflate,sdch';
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
     $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
     $httpProvider.defaults.headers['options'] = {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
